@@ -46,4 +46,12 @@ class ProductRepositoryTest {
         Product prodRepo = productRepository.save(updateProd);
         assertEquals(updateProd.hashCode(),prodRepo.hashCode());
     }
+
+    @Test
+    void isNotExistingSave(){
+        Product notFoundProd = new Product(300L, "Watch", 6000.00);
+        Product prodRepo = productRepository.save(notFoundProd);
+        assertEquals(notFoundProd, prodRepo);
+        assertTrue(productRepository.findById(300L).isEmpty());
+    }
 }
